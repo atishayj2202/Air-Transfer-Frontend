@@ -1,30 +1,40 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
+  <Appbar />
+  <Mainbar />
   <router-view />
 </template>
 
+<script>
+import Appbar from "@/components/Appbar.vue";
+import Mainbar from "@/components/Mainbar.vue";
+export default {
+  name: "App",
+  components: {
+    Appbar,
+    Mainbar,
+  },
+  mounted() {
+    document.body.style.backgroundColor = "#27282c";
+  },
+};
+</script>
+
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: white;
+  margin: auto;
+  margin-top: 0;
+  padding: 0px;
+  height: 100vh;
+  width: 80%;
 }
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+@media only screen and (max-width: 820px) {
+  #app {
+    width: 95%;
+  }
 }
 </style>
