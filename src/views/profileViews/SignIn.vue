@@ -47,28 +47,91 @@ export default {
 </script>
 
 <template>
-  <div>
-    <h1>Please Log In First</h1>
-    <br /><br /><br /><br />
-    <button class="login-button" @click="loginWithGoogle">
-      Sign In/Up with Google
-    </button>
+  <div class="centered-container">
+    <div class="content">
+      <h1>Login In</h1>
+      <br />
+      <button class="login-button" @click="loginWithGoogle">
+        <img
+          src="https://dashboard.doppler.com/imgs/integrations/github-logo.svg"
+          class="logo"
+        />Google
+      </button>
+      <button class="login-button" @click="loginWithGoogle">
+        <img
+          src="https://dashboard.doppler.com/imgs/integrations/github-logo.svg"
+          class="logo"
+        />Github
+      </button>
+      <button class="login-button" @click="loginWithGoogle">
+        <img
+          src="https://dashboard.doppler.com/imgs/integrations/github-logo.svg"
+          class="logo"
+        />Facebook
+      </button>
+      <button class="login-button" @click="loginWithGoogle">
+        <img
+          src="https://dashboard.doppler.com/imgs/integrations/github-logo.svg"
+          class="logo"
+        />Apple
+      </button>
+      <button
+        class="login-button"
+        @click="loginWithGoogle"
+        style="
+          display: block;
+          font-weight: bold;
+          color: white;
+          background-color: #3c58e9;
+        "
+      >
+        Register &rarr;</button
+      ><br />
+    </div>
   </div>
 </template>
 
 <style scoped>
 .login-button {
-  padding: 10px 20px;
-  background-color: #4285f4; /* Google blue */
-  color: white;
-  border: none;
-  border-radius: 4px;
+  background-color: white; /* Google blue */
+  color: #8d9599;
+  border: solid 1px #dae3f2;
+  border-radius: 5px;
+  width: 80%;
+  display: flex;
+  align-items: center;
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s ease;
+  margin: 10px 0;
+  padding: 15px 0 15px 0;
 }
 
 .login-button:hover {
-  background-color: #357ae8; /* Darker Google blue on hover */
+  border-color: rgb(21, 46, 208);
+}
+.content {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 12px;
+  padding: 8px;
+}
+.centered-container {
+  display: grid;
+  place-items: center;
+  height: 80vh;
+}
+.logo {
+  margin-right: 15%;
+  margin-left: 15%;
+  height: 45px;
+}
+@media only screen and (max-width: 820px) {
+  .content {
+    width: 80%;
+  }
 }
 </style>

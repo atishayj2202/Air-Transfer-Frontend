@@ -1,20 +1,17 @@
 <template>
-  <Appbar />
-  <Mainbar />
+  <Navbar_Full />
   <router-view />
 </template>
 
 <script>
-import Appbar from "@/components/Appbar.vue";
-import Mainbar from "@/components/Mainbar.vue";
+import Navbar_Full from "@/components/Navbar_Full.vue";
 export default {
   name: "App",
   components: {
-    Appbar,
-    Mainbar,
+    Navbar_Full,
   },
   mounted() {
-    document.body.style.backgroundColor = "#27282c";
+    document.body.style.backgroundColor = "#f9fafe";
   },
 };
 </script>
@@ -25,7 +22,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: white;
+  color: #3c58e9;
   margin: auto;
   margin-top: 0;
   padding: 0px;
@@ -34,7 +31,7 @@ export default {
 }
 @media only screen and (max-width: 820px) {
   #app {
-    width: 95%;
+    width: 98%;
   }
 }
 </style>
