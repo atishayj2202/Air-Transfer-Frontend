@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Recent from "@/views/Recent.vue";
-import CreatePost from "@/views/CreatePost.vue";
+import Recent from "@/views/Home.vue";
+import CreatePost from "@/views/SendFile.vue";
 import Profile from "@/views/Profile.vue";
 import SinglePost from "@/views/SinglePost.vue";
 

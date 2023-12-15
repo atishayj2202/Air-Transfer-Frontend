@@ -81,7 +81,7 @@ export default {
 
 <style scoped>
 .login-button {
-  background-color: white; /* Google blue */
+  background-color: white;
   color: #8d9599;
   border: solid 1px #dae3f2;
   border-radius: 5px;

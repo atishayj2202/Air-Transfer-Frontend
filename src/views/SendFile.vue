@@ -3,13 +3,10 @@ import { authUser } from "@/handler/authUtils";
 import axios from "axios";
 
 export default {
-  name: "CreatePost",
+  name: "Send-File",
   data() {
     return {
-      newPost: {
-        title: "",
-        body: "",
-      },
+      file: null,
     };
   },
   methods: {
@@ -66,65 +63,70 @@ export default {
 </script>
 
 <template>
-  <h1>Create a New Post</h1>
-  <form @submit.prevent="createPost">
-    <div class="form-group">
-      <input
-        type="text"
-        id="title"
-        v-model="newPost.title"
-        required
-        placeholder="Title"
-      />
+  <div class="centered-container">
+    <div class="content">
+      <h1>Send File</h1>
+      <br /><br />
+      <form @submit.prevent="createPost">
+        <div class="form-group">
+          <input type="file" id="file" required placeholder="File to Send" />
+        </div>
+        <button type="submit">Send File &rarr;</button>
+      </form>
     </div>
-    <div class="form-group">
-      <textarea
-        id="body"
-        v-model="newPost.body"
-        required
-        placeholder="Body"
-      ></textarea>
-    </div>
-    <button type="submit">Create Post</button>
-  </form>
+  </div>
 </template>
 
 <style scoped>
+.centered-container {
+  display: grid;
+  place-items: center;
+  height: 60vh;
+}
+.content {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 12px;
+  padding: 8px;
+}
 .form-group {
   width: 100%;
-  padding-top: 8px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  font-size: 15px;
-  justify-content: space-evenly;
-  font: caption;
-  filter: grayscale(100%);
 }
 button {
-  background-color: rgba(255, 255, 255, 1);
-  border: 3px solid black;
-  color: black;
-  font-size: 15px;
+  color: white;
+  background-color: #3c58e9;
+  border: solid 1px #dae3f2;
+  font-size: 16px;
   font-weight: bold;
-  padding: 8px;
-  width: 30vh;
+  margin: 10px 0;
+  padding: 15px 0 15px 0;
+  width: 60%;
 }
 
 button:hover {
-  background-color: rgba(52, 73, 94, 0.8);
-  border: 3px solid rgb(65, 184, 131);
-  color: white;
+  border-color: black;
+  background-color: rgb(21, 46, 208);
 }
 
-input,
-textarea {
-  color: white;
-  background-color: #34495e;
+input {
+  background-color: white;
+  color: #3c58e9;
+  border: solid 1px #dae3f2;
   font-size: 20px;
-  border: 3px solid #41b883;
-  padding: 5px;
-  margin: 5px;
+  margin: 10px 0;
+  padding: 15px 0 15px 0;
   width: 70%;
   font-weight: bold;
+}
+@media only screen and (max-width: 820px) {
+  .content {
+    width: 80%;
+  }
 }
 </style>
