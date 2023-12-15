@@ -1,19 +1,18 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Recent from "@/views/Home.vue";
-import CreatePost from "@/views/SendFile.vue";
-import Profile from "@/views/Profile.vue";
-import SinglePost from "@/views/SinglePost.vue";
+import Home from "@/views/Home.vue";
+import Send from "@/views/SendFile.vue";
+import Profile from "@/views/profileViews/ProfileView.vue";
+import ReceiveFile from "@/views/Receive File.vue";
+import signIn from "@/views/profileViews/SignIn.vue";
+import signUp from "@/views/profileViews/Register.vue";
 
 const routes = [
-  { name: "Recent", component: Recent, path: "/" },
-  { name: "CreatePost", component: CreatePost, path: "/new" },
+  { name: "Recent", component: Home, path: "/" },
+  { name: "CreatePost", component: Send, path: "/send" },
   { name: "Profile", component: Profile, path: "/profile" },
-  {
-    path: "/post/:id",
-    name: "single-post",
-    component: SinglePost,
-  },
-
+  { name: "Receive", component: ReceiveFile, path: "/receive" },
+  { name: "SignIn", component: signIn, path: "/signin" },
+  { name: "SignUp", component: signUp, path: "/signup" },
   {
     path: "/:catchAll(.*)",
     name: "Error",

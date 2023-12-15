@@ -5,6 +5,16 @@ import axios from "axios";
 
 export default {
   name: "Register-User",
+  data() {
+    return {
+      buttonBorderColor: "blue",
+      buttonShadow: "0 0 20px blue",
+    };
+  },
+  mounted() {
+    // Set up an interval to change the border color every second
+    setInterval(this.changeBorderColor, 1000);
+  },
   methods: {
     loginWithGoogle() {
       const provider = new GoogleAuthProvider();
@@ -42,13 +52,25 @@ export default {
           // ...
         });
     },
+    changeBorderColor() {
+      // Generate a random color (you can customize this logic)
+      const randomColor =
+        "#" + Math.floor(Math.random() * 16777215).toString(16);
+
+      // Update the data property to change the border color
+      this.buttonBorderColor = randomColor;
+      this.buttonShadow = `0 0 20px ${randomColor}`;
+    },
   },
 };
 </script>
 
 <template>
   <div class="centered-container">
-    <div class="content">
+    <div
+      class="content"
+      :style="{ borderColor: buttonBorderColor, boxShadow: buttonShadow }"
+    >
       <h1>Register</h1>
       <br />
       <button class="login-button" @click="loginWithGoogle">
@@ -103,6 +125,9 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-width: 1px;
+  border-style: solid;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
   background-color: white;
   border-radius: 12px;
   padding: 8px;
@@ -111,6 +136,7 @@ export default {
   display: grid;
   place-items: center;
   height: 80vh;
+  padding-bottom: 110px;
 }
 .logo {
   margin-right: 15%;
