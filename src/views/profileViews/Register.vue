@@ -4,7 +4,7 @@ import { saveUser } from "@/handler/authUtils";
 import axios from "axios";
 
 export default {
-  name: "SignIn",
+  name: "Register-User",
   methods: {
     loginWithGoogle() {
       const provider = new GoogleAuthProvider();
@@ -49,7 +49,7 @@ export default {
 <template>
   <div class="centered-container">
     <div class="content">
-      <h1>Login In</h1>
+      <h1>Register</h1>
       <br />
       <button class="login-button" @click="loginWithGoogle">
         <img src="@/assets/google.png" class="logo" />Google
@@ -73,7 +73,7 @@ export default {
           background-color: #3c58e9;
         "
       >
-        Register &rarr;</button
+        Sign In &rarr;</button
       ><br />
     </div>
   </div>
