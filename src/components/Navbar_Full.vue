@@ -1,3 +1,22 @@
+<script>
+import { getAuth } from "firebase/auth";
+
+export default {
+  // eslint-disable-next-line vue/multi-word-component-names
+  name: "Navbar_Full",
+  data() {
+    return {
+      isAuthenticated: true,
+    };
+  },
+  created() {
+    getAuth().onAuthStateChanged((user) => {
+      this.isAuthenticated = !!user;
+    });
+  },
+};
+</script>
+
 <template>
   <div class="navbar">
     <div>
@@ -7,20 +26,19 @@
     </div>
     <div>
       <ul>
-        <li><router-link to="/">Recent</router-link></li>
-        <li><router-link to="/new">New Post</router-link></li>
-        <li><router-link to="/profile">Profile</router-link></li>
+        <li><router-link to="/">Home</router-link></li>
+        <li><router-link to="/send">Send</router-link></li>
+        <li><router-link to="/receive">Receive</router-link></li>
+        <li>
+          <router-link to="/profile" v-if="this.isAuthenticated"
+            >Profile</router-link
+          >
+          <router-link to="/login" v-else>Sign In</router-link>
+        </li>
       </ul>
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  // eslint-disable-next-line vue/multi-word-component-names
-  name: "Navbar_Full",
-};
-</script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>

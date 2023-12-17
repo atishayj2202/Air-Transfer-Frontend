@@ -7,7 +7,7 @@ import {
 import { login } from "@/handler/login";
 
 export default {
-  name: "SignIn",
+  name: "Register-User",
   data() {
     return {
       buttonBorderColor: "blue",
@@ -15,7 +15,6 @@ export default {
     };
   },
   mounted() {
-    // Set up an interval to change the border color every second
     setInterval(this.changeBorderColor, 1000);
   },
   methods: {
@@ -48,8 +47,8 @@ export default {
       this.buttonBorderColor = randomColor;
       this.buttonShadow = `0 0 20px ${randomColor}`;
     },
-    redirctToRegister() {
-      this.$router.push("/register");
+    redirectTologin() {
+      this.$router.push("/login");
     },
   },
 };
@@ -61,7 +60,7 @@ export default {
       class="content"
       :style="{ borderColor: buttonBorderColor, boxShadow: buttonShadow }"
     >
-      <h1>Login</h1>
+      <h1>Register</h1>
       <br />
       <button class="login-button" @click="loginWithGoogle">
         <img src="@/assets/google.png" class="logo" />Google
@@ -74,7 +73,7 @@ export default {
       </button>
       <button
         class="login-button"
-        @click="redirctToRegister"
+        @click="redirectTologin"
         style="
           display: block;
           font-weight: bold;
@@ -82,7 +81,7 @@ export default {
           background-color: #3c58e9;
         "
       >
-        Register &rarr;</button
+        Login &rarr;</button
       ><br />
     </div>
   </div>
@@ -90,7 +89,7 @@ export default {
 
 <style scoped>
 .login-button {
-  background-color: white; /* Google blue */
+  background-color: white;
   color: #8d9599;
   border: solid 1px #dae3f2;
   border-radius: 5px;
@@ -111,10 +110,10 @@ export default {
   width: 60%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   border-width: 1px;
   border-style: solid;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  align-items: center;
   background-color: white;
   border-radius: 12px;
   padding: 8px;
