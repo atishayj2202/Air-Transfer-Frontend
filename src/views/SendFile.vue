@@ -5,11 +5,26 @@ export default {
     return {
       file: null,
       fileName: "",
+      buttonBorderColor: "blue",
+      buttonShadow: "0 0 20px blue",
     };
+  },
+  mounted() {
+    // Set up an interval to change the border color every second
+    setInterval(this.changeBorderColor, 1000);
   },
   methods: {
     browseFile() {
       this.$refs.fileInput.click();
+    },
+    changeBorderColor() {
+      // Generate a random color (you can customize this logic)
+      const randomColor =
+        "#" + Math.floor(Math.random() * 16777215).toString(16);
+
+      // Update the data property to change the border color
+      this.buttonBorderColor = randomColor;
+      this.buttonShadow = `0 0 20px ${randomColor}`;
     },
     handleFileInputChange(e) {
       const tempfile = e.target.files[0];
@@ -27,7 +42,10 @@ export default {
 
 <template>
   <div class="centered-container">
-    <div class="content">
+    <div
+      class="content"
+      :style="{ borderColor: buttonBorderColor, boxShadow: buttonShadow }"
+    >
       <h1>Send File</h1>
       <br /><br />
       <input

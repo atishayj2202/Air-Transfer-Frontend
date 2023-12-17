@@ -1,25 +1,68 @@
 <script>
 export default {
-  name: "Receive-File",
+  name: "Send-File",
   data() {
     return {
-      room: null,
+      file: null,
+      fileName: "",
+      buttonBorderColor: "blue",
+      buttonShadow: "0 0 20px blue",
     };
+  },
+  mounted() {
+    // Set up an interval to change the border color every second
+    setInterval(this.changeBorderColor, 1000);
+  },
+  methods: {
+    browseFile() {
+      this.$refs.fileInput.click();
+    },
+    changeBorderColor() {
+      // Generate a random color (you can customize this logic)
+      const randomColor =
+        "#" + Math.floor(Math.random() * 16777215).toString(16);
+
+      // Update the data property to change the border color
+      this.buttonBorderColor = randomColor;
+      this.buttonShadow = `0 0 20px ${randomColor}`;
+    },
+    handleFileInputChange(e) {
+      const tempfile = e.target.files[0];
+      if (tempfile) {
+        this.file = tempfile;
+        this.fileName = "Selected File : " + tempfile.name;
+      } else {
+        this.file = null;
+        this.fileName = null;
+      }
+    },
   },
 };
 </script>
 
 <template>
   <div class="centered-container">
-    <div class="content">
-      <h1>Receive File</h1>
+    <div
+      class="content"
+      :style="{ borderColor: buttonBorderColor, boxShadow: buttonShadow }"
+    >
+      <h1>Send File</h1>
       <br /><br />
-      <form @submit.prevent="createPost">
-        <div class="form-group">
-          <input type="text" id="file" required placeholder="Room No." />
-        </div>
-        <button type="submit">Join Room &rarr;</button>
-      </form>
+      <input
+        type="file"
+        id="file"
+        required
+        placeholder="File to Send"
+        ref="fileInput"
+        @change="handleFileInputChange"
+      />
+      <button @click="browseFile">Browse File</button>
+      <p>{{ fileName }}</p>
+      <button
+        style="font-weight: bold; color: white; background-color: #3c58e9"
+      >
+        Send File &rarr;
+      </button>
     </div>
   </div>
 </template>
@@ -34,52 +77,44 @@ export default {
   width: 60%;
   display: flex;
   flex-direction: column;
+  border-width: 1px;
+  border-style: solid;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
   align-items: center;
   background-color: white;
   border-radius: 12px;
   padding: 8px;
 }
-.form-group {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+p {
+  font-size: 18px;
+  color: #3c58e9;
+  display: block;
 }
+
 button {
-  color: white;
-  background-color: #3c58e9;
+  background-color: white; /* Google blue */
+  color: #3c58e9;
   border: solid 1px #dae3f2;
+  display: block;
+  border-radius: 5px;
+  width: 80%;
+  align-items: center;
+  cursor: pointer;
   font-size: 16px;
-  font-weight: bold;
+  transition: background-color 0.3s ease;
   margin: 10px 0;
   padding: 15px 0 15px 0;
-  width: 60%;
 }
 
 button:hover {
-  border-color: black;
-  background-color: rgb(21, 46, 208);
+  border-color: rgb(21, 46, 208);
 }
-
 input {
-  background-color: white;
-  color: #3c58e9;
-  border: solid 1px #dae3f2;
-  font-size: 20px;
-  margin: 10px 0;
-  padding: 15px 0 15px 0;
-  width: 70%;
-  font-weight: bold;
+  display: none;
 }
 @media only screen and (max-width: 820px) {
   .content {
     width: 80%;
   }
-}
-form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 </style>
