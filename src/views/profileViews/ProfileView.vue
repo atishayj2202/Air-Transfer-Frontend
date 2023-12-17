@@ -1,6 +1,6 @@
 <script>
-import { authUser, deleteUser } from "@/handler/authUtils";
-import axios from "axios";
+import { getAuth } from "firebase/auth";
+
 export default {
   name: "ProfileView",
   data() {
@@ -8,33 +8,16 @@ export default {
       username: "Loading", // Replace with the actual username or retrieve it from your authentication system
     };
   },
-  mounted() {
-    const temp = authUser();
-    if (temp.status) {
-      axios
-        .post(
-          "https://server.yellowbush-cadc3844.centralindia.azurecontainerapps.io/user/get_user/",
-          null,
-          {
-            params: { id: temp.uid },
-          }
-        )
-        .then((response) => {
-          const parsedData = JSON.parse(response.data);
-          console.log(parsedData.Data);
-          this.username = parsedData.Data.name;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } else {
-      window.location.reload();
-    }
-  },
   methods: {
     signOut() {
-      deleteUser();
-      window.location.reload();
+      try {
+        const auth = getAuth();
+        auth.signOut();
+        console.log("Signed out");
+        this.$router.push("/");
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };
