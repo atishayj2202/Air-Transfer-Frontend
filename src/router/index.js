@@ -5,7 +5,7 @@ import Profile from "@/views/profileViews/ProfileView.vue";
 import ReceiveFile from "@/views/Receive File.vue";
 import signIn from "@/views/profileViews/SignIn.vue";
 import signUp from "@/views/profileViews/Register.vue";
-import { authUserBool } from "@/handler/authUtils";
+import { authUserBool } from "@/handler/authorization";
 
 const routes = [
   { name: "Home", component: Home, path: "/" },
