@@ -1,7 +1,7 @@
 <script>
 import SignIn from "@/views/profileViews/SignIn.vue";
 import ProfileView from "@/views/profileViews/ProfileView.vue";
-import { authUser } from "@/handler/authUtils";
+import { authUser } from "@/handler/authorization";
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Profile",

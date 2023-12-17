@@ -1,5 +1,10 @@
 <script>
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  GithubAuthProvider,
+  FacebookAuthProvider,
+} from "firebase/auth";
+import { login } from "@/handler/login";
 
 export default {
   name: "SignIn",
@@ -14,21 +19,25 @@ export default {
     setInterval(this.changeBorderColor, 1000);
   },
   methods: {
+    async loginHandle(provider) {
+      const auth = await login(provider);
+      if (auth === false) {
+        alert(" Login Error");
+      } else {
+        this.$router.push("/profile");
+      }
+    },
     loginWithGoogle() {
       const provider = new GoogleAuthProvider();
-      const auth = getAuth();
-      signInWithPopup(auth, provider)
-        .then((result) => {
-          console.log(result.user);
-          this.$router.push("/profile");
-        })
-        .catch((error) => {
-          // Handle Errors here.
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorCode + errorMessage);
-          // ...
-        });
+      this.loginHandle(provider);
+    },
+    loginWithGithub() {
+      const provider = new GithubAuthProvider();
+      this.loginHandle(provider);
+    },
+    loginWithFacebook() {
+      const provider = new FacebookAuthProvider();
+      this.loginHandle(provider);
     },
     changeBorderColor() {
       // Generate a random color (you can customize this logic)
@@ -57,14 +66,11 @@ export default {
       <button class="login-button" @click="loginWithGoogle">
         <img src="@/assets/google.png" class="logo" />Google
       </button>
-      <button class="login-button" @click="loginWithGoogle">
+      <button class="login-button" @click="loginWithGithub">
         <img src="@/assets/github.png" class="logo" />Github
       </button>
-      <button class="login-button" @click="loginWithGoogle">
+      <button class="login-button" @click="loginWithFacebook">
         <img src="@/assets/facebook.png" class="logo" />Facebook
-      </button>
-      <button class="login-button" @click="loginWithGoogle">
-        <img src="@/assets/apple.png" class="logo" />Apple
       </button>
       <button
         class="login-button"
