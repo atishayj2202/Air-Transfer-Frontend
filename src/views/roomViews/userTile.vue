@@ -16,7 +16,9 @@ export default {
 
 <style scoped>
 .user-tile {
-  border: 2px dotted blue;
+  border-width: 1px 0 1px 0;
+  border-style: solid;
+  border-color: #3c58e9;
   width: 100%;
   display: flex;
   align-items: center;
@@ -35,7 +37,7 @@ button {
   cursor: pointer;
   font-weight: bold;
   transition: background-color 0.3s ease;
-  margin: 10px 0;
+  margin: 5px 0;
   padding: 15px;
 }
 

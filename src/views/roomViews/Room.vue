@@ -46,6 +46,7 @@ export default {
       <h1>Room : {{ room_id }}</h1>
       <p>Status : {{ status }}</p>
       <br /><br />
+      <br />
       <div v-for="user in users" :key="user.id" class="user">
         <UserTile :user="user" />
       </div>
