@@ -1,5 +1,5 @@
 <script>
-import { authUser } from "@/handler/authUtils";
+import { authUser } from "@/handler/authorization";
 import axios from "axios";
 
 export default {
