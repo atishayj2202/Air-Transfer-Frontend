@@ -1,63 +1,10 @@
 <script>
-import { authUser } from "@/handler/authUtils";
-import axios from "axios";
-
 export default {
   name: "Receive-File",
   data() {
     return {
-      file: null,
+      room: null,
     };
-  },
-  methods: {
-    createPost() {
-      const temp = authUser();
-      if (temp.status) {
-        axios
-          .post(
-            "https://server.yellowbush-cadc3844.centralindia.azurecontainerapps.io/user/get_user/",
-            null,
-            {
-              params: { id: temp.uid },
-            }
-          )
-          .then((response) => {
-            const parsedData = JSON.parse(response.data);
-            const author = parsedData.Data.name;
-            axios
-              .post(
-                "https://server.yellowbush-cadc3844.centralindia.azurecontainerapps.io/post/add_post/",
-                null,
-                {
-                  params: {
-                    title: this.newPost.title,
-                    body: this.newPost.body,
-                    author_name: author,
-                    author_id: temp.uid,
-                  },
-                }
-              )
-              .then((response) => {
-                const parsedData = JSON.parse(response.data);
-                if (parsedData.Status === "Success") {
-                  alert("Posted");
-                  this.$router.push("/");
-                } else {
-                  alert("Unexpected Error, Unable to post");
-                }
-              })
-              .catch((error) => {
-                alert("Unexpected Error, Unable to post");
-                console.log(error);
-              });
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      } else {
-        alert("Pls login to post");
-      }
-    },
   },
 };
 </script>
@@ -69,9 +16,9 @@ export default {
       <br /><br />
       <form @submit.prevent="createPost">
         <div class="form-group">
-          <input type="file" id="file" required placeholder="File to Send" />
+          <input type="text" id="file" required placeholder="Room No." />
         </div>
-        <button type="submit">Send File &rarr;</button>
+        <button type="submit">Join Room &rarr;</button>
       </form>
     </div>
   </div>
@@ -128,5 +75,11 @@ input {
   .content {
     width: 80%;
   }
+}
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>
