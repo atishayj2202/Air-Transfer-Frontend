@@ -1,7 +1,5 @@
 <script>
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { saveUser } from "@/handler/authUtils";
-import axios from "axios";
 
 export default {
   name: "SignIn",
@@ -21,28 +19,8 @@ export default {
       const auth = getAuth();
       signInWithPopup(auth, provider)
         .then((result) => {
-          // The signed-in user info.
-          const user = result.user;
-          const data = {
-            name: user.displayName.toString(),
-            uid: user.uid.toString(),
-          };
-          axios
-            .post(
-              "https://server.yellowbush-cadc3844.centralindia.azurecontainerapps.io/user/create_user/",
-              null,
-              { params: data }
-            )
-            .then((response) => {
-              const parsedData = JSON.parse(response.data);
-              saveUser(parsedData.Data.toString());
-              window.location.reload();
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-          // IdP data available using getAdditionalUserInfo(result)
-          // ...
+          console.log(result.user);
+          this.$router.push("/profile");
         })
         .catch((error) => {
           // Handle Errors here.
@@ -61,6 +39,9 @@ export default {
       this.buttonBorderColor = randomColor;
       this.buttonShadow = `0 0 20px ${randomColor}`;
     },
+    redirctToRegister() {
+      this.$router.push("/register");
+    },
   },
 };
 </script>
@@ -71,7 +52,7 @@ export default {
       class="content"
       :style="{ borderColor: buttonBorderColor, boxShadow: buttonShadow }"
     >
-      <h1>Login In</h1>
+      <h1>Login</h1>
       <br />
       <button class="login-button" @click="loginWithGoogle">
         <img src="@/assets/google.png" class="logo" />Google
@@ -87,7 +68,7 @@ export default {
       </button>
       <button
         class="login-button"
-        @click="loginWithGoogle"
+        @click="redirctToRegister"
         style="
           display: block;
           font-weight: bold;

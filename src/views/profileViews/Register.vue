@@ -1,7 +1,5 @@
 <script>
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { saveUser } from "@/handler/authUtils";
-import axios from "axios";
 
 export default {
   name: "Register-User",
@@ -21,28 +19,8 @@ export default {
       const auth = getAuth();
       signInWithPopup(auth, provider)
         .then((result) => {
-          // The signed-in user info.
-          const user = result.user;
-          const data = {
-            name: user.displayName.toString(),
-            uid: user.uid.toString(),
-          };
-          axios
-            .post(
-              "https://server.yellowbush-cadc3844.centralindia.azurecontainerapps.io/user/create_user/",
-              null,
-              { params: data }
-            )
-            .then((response) => {
-              const parsedData = JSON.parse(response.data);
-              saveUser(parsedData.Data.toString());
-              window.location.reload();
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-          // IdP data available using getAdditionalUserInfo(result)
-          // ...
+          console.log(result.user);
+          this.$router.push("/profile");
         })
         .catch((error) => {
           // Handle Errors here.
@@ -60,6 +38,9 @@ export default {
       // Update the data property to change the border color
       this.buttonBorderColor = randomColor;
       this.buttonShadow = `0 0 20px ${randomColor}`;
+    },
+    redirectTologin() {
+      this.$router.push("/login");
     },
   },
 };
@@ -87,7 +68,7 @@ export default {
       </button>
       <button
         class="login-button"
-        @click="loginWithGoogle"
+        @click="redirectTologin"
         style="
           display: block;
           font-weight: bold;
@@ -95,7 +76,7 @@ export default {
           background-color: #3c58e9;
         "
       >
-        Sign In &rarr;</button
+        Login &rarr;</button
       ><br />
     </div>
   </div>
