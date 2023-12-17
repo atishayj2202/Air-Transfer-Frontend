@@ -1,9 +1,17 @@
 <script>
+import UserTile from "@/views/roomViews/userTile.vue";
+
 export default {
   name: "Room-File",
+  components: { UserTile },
   data() {
     return {
-      users: [],
+      users: [
+        { id: "cgfhcgh", name: "User 1" },
+        { id: "jhbjhbv", name: "User 2" },
+        { id: "jhtyjvkbjhbv", name: "User 3" },
+        { id: "jhtyjvkbjhsubsjbv", name: "User 4" },
+      ],
       status: "",
       room_id: "",
       on_off_bool: true,
@@ -25,16 +33,6 @@ export default {
       this.buttonBorderColor = randomColor;
       this.buttonShadow = `0 0 20px ${randomColor}`;
     },
-    handleFileInputChange(e) {
-      const tempfile = e.target.files[0];
-      if (tempfile) {
-        this.file = tempfile;
-        this.fileName = "Selected File : " + tempfile.name;
-      } else {
-        this.file = null;
-        this.fileName = null;
-      }
-    },
   },
 };
 </script>
@@ -48,6 +46,10 @@ export default {
       <h1>Room : {{ room_id }}</h1>
       <p>Status : {{ status }}</p>
       <br /><br />
+      <div v-for="user in users" :key="user.id" class="user">
+        <UserTile :user="user" />
+      </div>
+      <br />
       <button style="background-color: #4caf50" v-if="on_off_bool">
         Start
       </button>
@@ -57,6 +59,12 @@ export default {
 </template>
 
 <style scoped>
+.user {
+  margin: 0;
+  padding: 0 34px 0 0;
+  justify-content: center;
+  width: calc(80% - 30px);
+}
 .centered-container {
   display: grid;
   place-items: center;
@@ -97,14 +105,14 @@ button {
 }
 
 button:hover {
-  border-color: rgb(21, 46, 208);
+  border-color: black;
 }
 input {
   display: none;
 }
 @media only screen and (max-width: 820px) {
   .content {
-    width: 100%;
+    width: 95%;
   }
 }
 </style>
