@@ -5,6 +5,8 @@ import Profile from "@/views/profileViews/ProfileView.vue";
 import ReceiveFile from "@/views/Receive File.vue";
 import signIn from "@/views/profileViews/SignIn.vue";
 import signUp from "@/views/profileViews/Register.vue";
+import room from "@/views/roomViews/Room.vue";
+import Error from "@/views/Error.vue";
 import { authUserBool } from "@/handler/authorization";
 
 const routes = [
@@ -38,6 +40,11 @@ const routes = [
     component: signUp,
     path: "/register",
     meta: { requiresNoAuth: true, requiresAuth: false },
+  },
+  {
+    name: "Room",
+    component: room,
+    path: "/room/:id",
   },
   {
     path: "/:catchAll(.*)",
