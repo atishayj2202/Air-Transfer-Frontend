@@ -1,10 +1,9 @@
 <script>
 export default {
-  name: "Send-File",
+  name: "Receive-File",
   data() {
     return {
-      file: null,
-      fileName: "",
+      room: null,
       buttonBorderColor: "blue",
       buttonShadow: "0 0 20px blue",
     };
@@ -14,9 +13,6 @@ export default {
     setInterval(this.changeBorderColor, 1000);
   },
   methods: {
-    browseFile() {
-      this.$refs.fileInput.click();
-    },
     changeBorderColor() {
       // Generate a random color (you can customize this logic)
       const randomColor =
@@ -25,16 +21,6 @@ export default {
       // Update the data property to change the border color
       this.buttonBorderColor = randomColor;
       this.buttonShadow = `0 0 20px ${randomColor}`;
-    },
-    handleFileInputChange(e) {
-      const tempfile = e.target.files[0];
-      if (tempfile) {
-        this.file = tempfile;
-        this.fileName = "Selected File : " + tempfile.name;
-      } else {
-        this.file = null;
-        this.fileName = null;
-      }
     },
   },
 };
@@ -46,23 +32,14 @@ export default {
       class="content"
       :style="{ borderColor: buttonBorderColor, boxShadow: buttonShadow }"
     >
-      <h1>Send File</h1>
+      <h1>Receive File</h1>
       <br /><br />
-      <input
-        type="file"
-        id="file"
-        required
-        placeholder="File to Send"
-        ref="fileInput"
-        @change="handleFileInputChange"
-      />
-      <button @click="browseFile">Browse File</button>
-      <p>{{ fileName }}</p>
-      <button
-        style="font-weight: bold; color: white; background-color: #3c58e9"
-      >
-        Send File &rarr;
-      </button>
+      <form @submit.prevent="createPost">
+        <div class="form-group">
+          <input type="text" id="file" required placeholder="Room No." />
+        </div>
+        <button type="submit">Join Room &rarr;</button>
+      </form>
     </div>
   </div>
 </template>
@@ -77,23 +54,20 @@ export default {
   width: 60%;
   display: flex;
   flex-direction: column;
-  border-width: 1px;
-  border-style: solid;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
   align-items: center;
   background-color: white;
   border-radius: 12px;
   padding: 8px;
 }
-p {
-  font-size: 18px;
-  color: #3c58e9;
-  display: block;
+.form-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-
 button {
-  background-color: white; /* Google blue */
-  color: #3c58e9;
+  color: white;
+  background-color: #3c58e9;
   border: solid 1px #dae3f2;
   display: block;
   border-radius: 5px;
@@ -107,14 +81,33 @@ button {
 }
 
 button:hover {
-  border-color: rgb(21, 46, 208);
+  border-color: black;
+  background-color: rgb(21, 46, 208);
 }
+
 input {
-  display: none;
+  background-color: white;
+  color: #3c58e9;
+  border: solid 1px #dae3f2;
+  display: block;
+  border-radius: 5px;
+  width: calc(80% - 30px);
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin: 10px 0;
+  padding: 15px 15px 15px 15px;
 }
 @media only screen and (max-width: 820px) {
   .content {
     width: 80%;
   }
+}
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>
