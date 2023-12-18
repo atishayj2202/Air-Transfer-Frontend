@@ -46,7 +46,6 @@ export default {
   flex-direction: column;
   justify-content: center;
   margin: 0;
-  background: #8d9599;
   text-align: left;
   padding: 0 15px;
   width: calc(100% - 30px);
