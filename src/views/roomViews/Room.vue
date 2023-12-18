@@ -1,9 +1,10 @@
 <script>
 import UserTile from "@/views/roomViews/userTile.vue";
+import DataTile from "@/views/roomViews/dataTile.vue";
 
 export default {
   name: "Room-File",
-  components: { UserTile },
+  components: { DataTile, UserTile },
   data() {
     return {
       users: [
@@ -12,6 +13,7 @@ export default {
         { id: "jhtyjvkbjhbv", name: "User 3" },
         { id: "jhtyjvkbjhsubsjbv", name: "User 4" },
       ],
+      data: Object,
       status: "",
       room_id: "",
       on_off_bool: true,
@@ -44,8 +46,9 @@ export default {
       :style="{ borderColor: buttonBorderColor, boxShadow: buttonShadow }"
     >
       <h1>Room : {{ room_id }}</h1>
-      <p>Status : {{ status }}</p>
+      <p><b>Status : </b>{{ status }}</p>
       <br /><br />
+      <data-tile :data="data" :percentage="50" class="data" />
       <br />
       <div v-for="user in users" :key="user.id" class="user">
         <UserTile :user="user" />
@@ -62,9 +65,16 @@ export default {
 <style scoped>
 .user {
   margin: 0;
-  padding: 0 34px 0 0;
+  padding: 0 30px 0 0;
   justify-content: center;
   width: calc(80% - 30px);
+}
+.data {
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+  width: 80%;
+  overflow: hidden;
 }
 .centered-container {
   display: grid;
